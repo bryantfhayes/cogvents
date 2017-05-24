@@ -15,7 +15,7 @@
 gDict = {}
 events = {}
 def winEvent(data):
-    print("WINNER")
+    print("The game has been won!")
     exit()
 
 def AddListener(event, fn):
@@ -51,10 +51,12 @@ def fnStart(data):
 def main():
     # ADD YOUR LISTERNS HERE!   
     AddListener('Event_Start', fnStart)
+    AddListener('Event_Win', winEvent)
     # EXAMPLE: AddListener('Event_Example', fnExample)
 
     # DO NOT TOUCH
     Emit('Event_Start')
+    print("No one won the game!");
 
 if __name__ == "__main__":
     main()
