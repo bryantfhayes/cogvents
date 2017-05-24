@@ -10,7 +10,7 @@ class ListStream:
         self.data.append(s)
     def flush(self):
         pass
-        
+
 x = ListStream()
 sys.stdout = x
 hasRun = False
@@ -27,7 +27,7 @@ def homepage():
     return """
     <h1>COGVENTS</h1>
     <p>{}</p>
-    """.format("".join(x.data))
+    """.format("\n".join(x.data))
 
 if __name__ == '__main__':
     app.run(debug=False)
