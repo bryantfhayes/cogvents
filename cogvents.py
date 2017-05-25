@@ -54,6 +54,20 @@ def vowelLimiter(data):
   if vowelcount > 40:
     Emit('Event_Win')
 
+def fnRandomExecution(data):
+  import random
+  global gDict
+  whichEvent = (random.randint(0, len(events)-1))
+  theEvent = list(events.keys())[whichEvent]
+  print(("\tRandomExecution attempting to emit: "  + theEvent))
+  gDict["fnRandomExecution"] = theEvent
+  if theEvent != "Event_Win" and theEvent != "Event_Start" and theEvent != "Event_Boom":
+    Emit(theEvent, whichEvent)
+    Emit(theEvent, whichEvent)
+  else:
+    print("\t\tI aint emitting that!")
+  print(gDict)
+  
 # # Example:
 # # NOTE: function must take a data argument, this could be any type
 # def fnExample(data):
@@ -69,11 +83,14 @@ def vowelLimiter(data):
 #                 Add Listeners                    #
 ####################################################
 def main():
-    # ADD YOUR LISTERNS HERE!   
     AddListener('Event_Start', fnStart)
     AddListener('Event_Win', winEvent)
+    
+    # ONLY ADD/MOVE LISTERNS UNDER HERE!   
     AddListener('Event_Start', fnDynamite)
     AddListener('Event_Start', vowelLimiter)
+    AddListener('Event_Boom', fnRandomExecution)
+    
     # EXAMPLE: AddListener('Event_Example', fnExample)
 
     # DO NOT TOUCH
