@@ -25,14 +25,22 @@ def AddListener(event, fn):
     events[event].append(fn)
 
 def Emit(e, data=None):
-    for event in events[e]:
-        event(data)
+    if e in events:
+        for event in events[e]:
+            event(data)
 
 ####################################################
 #                 Add Functions                    #
 ####################################################
 def fnStart(data):
     print("Start!")
+
+def fnDynamite(data):
+    import random
+    odds = (random.randint(1,100))
+    if odds <= 20:
+        print("Dynamite blew!")
+        Emit("Event_Boom")
 
 # # Example:
 # # NOTE: function must take a data argument, this could be any type
@@ -52,6 +60,7 @@ def main():
     # ADD YOUR LISTERNS HERE!   
     AddListener('Event_Start', fnStart)
     AddListener('Event_Win', winEvent)
+    AddListener('Event_Start', fnDynamite)
     # EXAMPLE: AddListener('Event_Example', fnExample)
 
     # DO NOT TOUCH
