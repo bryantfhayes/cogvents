@@ -27,7 +27,7 @@ def homepage():
     return """
     <h1>COGVENTS</h1>
     <p>{}</p>
-    """.format("\n".join(x.data))
+    """.format("".join(x.data).replace('\n', "<br>"))
 
 if __name__ == '__main__':
     app.run(debug=False)
