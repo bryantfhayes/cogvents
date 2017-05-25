@@ -42,6 +42,18 @@ def fnDynamite(data):
         print("Dynamite blew!")
         Emit("Event_Boom")
 
+def vowelLimiter(data):
+  vowelcount = 0;
+  for key in gDict:
+    vowelcount += key.lower().count('a')
+    vowelcount += key.lower().count('e')
+    vowelcount += key.lower().count('i')
+    vowelcount += key.lower().count('o')
+    vowelcount += key.lower().count('u')
+    vowelcount -= key.lower().count('y')
+  if vowelcount > 40:
+    Emit('Event_Win')
+
 # # Example:
 # # NOTE: function must take a data argument, this could be any type
 # def fnExample(data):
@@ -61,6 +73,7 @@ def main():
     AddListener('Event_Start', fnStart)
     AddListener('Event_Win', winEvent)
     AddListener('Event_Start', fnDynamite)
+    AddListener('Event_Start', vowelLimiter)
     # EXAMPLE: AddListener('Event_Example', fnExample)
 
     # DO NOT TOUCH
