@@ -11,9 +11,9 @@ Rules:
 9. ONLY EDIT COGVENTS.PY
 
 Turn Order:
-[*] Bryant
+[ ] Bryant
 [ ] Ben
-[ ] Caleb
+[*] Caleb
 [ ] Christian
 [ ] Hatch
 [ ] Nick
