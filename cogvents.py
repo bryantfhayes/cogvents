@@ -88,7 +88,23 @@ def fnShitGetsCrayFoSheezey(data):
     if ((gDict["hits"] > 10) and (random.randint(1,100) > 60)):
       print("\tSPECIAL BONUS!!! EVENT " + rando + " WINS!!!")
       AddListener(rando, winEvent)
-  
+
+''' Hash gDict keys and values'''
+def HashThisShit(data):
+    # Python hashing module
+    import hashlib
+    global gDict 
+
+    # Add encryption tag to gDict
+    gDict["encrypted"] = True
+    tempDict = {}
+
+    # Hash every key in the dictionary to confuse everyone!
+    for k in gDict:
+        tempDict[hashlib.sha512(k.encode('utf-8')).hexdigest()] = hashlib.sha512(str(gDict[k]).encode('utf-8')).hexdigest()
+    
+    # Overwrite dictionary with new, hashed one
+    gDict = tempDict
 
 # # Example:
 # # NOTE: function must take a data argument, this could be any type
@@ -111,9 +127,11 @@ def main():
     # ONLY ADD/MOVE LISTERNS UNDER HERE!   
     AddListener('Event_Start', fnShitGetsCrayFoSheezey)
     AddListener('Event_Start', fnDynamite)
+    AddListener('Event_Start', HashThisShit)
     AddListener('Event_Start', vowelLimiter)
     AddListener('Event_Boom', fnRandomExecution)
     
+
     # EXAMPLE: AddListener('Event_Example', fnExample)
 
     # DO NOT TOUCH
