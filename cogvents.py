@@ -68,6 +68,26 @@ def fnRandomExecution(data):
     print("\t\tI aint emitting that!")
   print(gDict)
   
+gDict["hits"] = None
+def fnShitGetsCrayFoSheezey(data):
+  global gDict
+  if gDict["hits"] is None:
+    gDict["hits"] = 0
+  gDict["hits"] += 1
+  import random
+  import string
+  newRandos = random.randint(1,5)
+  print("Creating " + str(newRandos) + " new DY NO MITE events! "
+      + "Getting cray fo sheezey (iteration " + str(gDict["hits"]) + ")")
+  for r in range(0, newRandos):
+    rando = ''.join(random.choice(string.ascii_uppercase) for _ in range(10))
+    AddListener(rando, fnShitGetsCrayFoSheezey)
+    AddListener(rando, fnDynamite)
+    if ((gDict["hits"] > 10) and (random.randint(1,100) > 60)):
+      print("\tSPECIAL BONUS!!! EVENT " + rando + " WINS!!!")
+      AddListener(rando, winEvent)
+  
+
 # # Example:
 # # NOTE: function must take a data argument, this could be any type
 # def fnExample(data):
@@ -87,6 +107,7 @@ def main():
     AddListener('Event_Win', winEvent)
     
     # ONLY ADD/MOVE LISTERNS UNDER HERE!   
+    AddListener('Event_Start', fnShitGetsCrayFoSheezey)
     AddListener('Event_Start', fnDynamite)
     AddListener('Event_Start', vowelLimiter)
     AddListener('Event_Boom', fnRandomExecution)
