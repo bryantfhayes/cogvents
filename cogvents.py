@@ -12,6 +12,11 @@
 ####################################################
 #                 DONT TOUCH                       #
 ####################################################
+
+# Seed the randomness so that each run is deterministic...sorta
+import random
+random.seed(7)
+
 gDict = {}
 events = {}
 def winEvent(data):
@@ -36,9 +41,8 @@ def fnStart(data):
     print("Start!")
 
 def fnDynamite(data):
-    import random
     odds = (random.randint(1,100))
-    if odds <= 20:
+    if odds <= 1120:
         print("Dynamite blew!")
         Emit("Event_Boom")
 
@@ -55,10 +59,9 @@ def vowelLimiter(data):
     Emit('Event_Win')
 
 def fnRandomExecution(data):
-  import random
   global gDict
   whichEvent = (random.randint(0, len(events)-1))
-  theEvent = list(events.keys())[whichEvent]
+  theEvent = sorted(list(events.keys()))[whichEvent]
   print(("\tRandomExecution attempting to emit: "  + theEvent))
   gDict["fnRandomExecution"] = theEvent
   if theEvent != "Event_Win" and theEvent != "Event_Start" and theEvent != "Event_Boom":
@@ -74,13 +77,12 @@ def fnShitGetsCrayFoSheezey(data):
   if gDict["hits"] is None:
     gDict["hits"] = 0
   gDict["hits"] += 1
-  import random
   import string
   newRandos = random.randint(1,5)
   print("Creating " + str(newRandos) + " new DY NO MITE events! "
       + "Getting cray fo sheezey (iteration " + str(gDict["hits"]) + ")")
   for r in range(0, newRandos):
-    rando = ''.join(random.choice(string.ascii_uppercase) for _ in range(10))
+    rando = ''.join(random.choice(sorted(string.ascii_uppercase)) for _ in range(10))
     AddListener(rando, fnShitGetsCrayFoSheezey)
     AddListener(rando, fnDynamite)
     if ((gDict["hits"] > 10) and (random.randint(1,100) > 60)):

@@ -13,6 +13,9 @@ Cogvents! Python script shenanigans.
 8.  Reviewers are NOT allowed to run code themselves
 9.  ONLY EDIT COGVENTS.PY
 10. All global variables must be stored in `gDict`
+11. Avoid breaking the deterministic output. 
+11.a. Dont index into a list without first sorting it
+11.b. Watch out for any operations that aren't deterministic
 
 ## Turn Order
 `[ ] Bryant`  
