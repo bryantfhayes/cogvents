@@ -20,6 +20,6 @@ Cogvents! Python script shenanigans.
 `[ ] Caleb`  
 `[ ] Christian`  
 `[ ] Hatch`  
-`[*] Nick` 
+`[*] Nick`  
 `[ ] Max`  
 
