@@ -1,6 +1,7 @@
 from flask import Flask
 from datetime import datetime
 import sys
+import buildinfo
 
 # Overload std stream to local string
 class ListStream:
@@ -24,10 +25,13 @@ def homepage():
     if hasRun == False:
         main()
         hasRun = True
-    return """
+    body = """
     <h1>COGVENTS</h1>
     <p>{}</p>
     """.format("".join(x.data).replace('\n', "<br>"))
+    buildRev = "<br/><br/><i>Git revision: " + buildinfo.getRevision() + "</i>"
+    
+    return body + buildRev
 
 if __name__ == '__main__':
     app.run(debug=False)
