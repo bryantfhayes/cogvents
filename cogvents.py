@@ -42,7 +42,7 @@ def fnStart(data):
 
 def fnDynamite(data):
     odds = (random.randint(1,100))
-    if odds <= 1120:
+    if odds <= 20:
         print("Dynamite blew!")
         Emit("Event_Boom")
 
@@ -88,7 +88,46 @@ def fnShitGetsCrayFoSheezey(data):
     if ((gDict["hits"] > 10) and (random.randint(1,100) > 60)):
       print("\tSPECIAL BONUS!!! EVENT " + rando + " WINS!!!")
       AddListener(rando, winEvent)
-  
+
+def buildFortress(data):
+  global gDict
+  firstNames = ['Asen','Bomrek','Feb','Ingiz','Meng','Urdim','Olon','Kol','Vucar','Zaneg']
+
+  lastNames  = ['Saziregul', 'Agmelbil', 'Medenlorbam', 'Umstizkadol', 'Dumnish', 'Songobok', 'Iloltar', 'Urdimoslan', 'Olinuker', 'Zaludatir']
+
+  skills = ['Miner', 'Mason', 'Brewer', 'Cook', 'Grower', 'Fisherdwarf', 'Armorsmith', 'Metalsmith', 'Weaponsmith', 'Leatherworker',
+            'Stone crafter', 'Wood crafter', 'Mechanic', 'Appraiser',  'Armor user', 'Axeman', 'Crossbowman', 'Dodger', 'Hammerman', 'Swordsman']
+
+  wildlife = ['Bird', 'Elk', 'Carp', 'Turtle', 'Elephant', 'Earthworm', 'Cow', 'Moose', 'Lion', 'Polar bear',
+              'Fox', 'Raven', 'Dog', 'Cat', 'Naked Mole Dog', 'Camel', 'Cheetah', 'Buzzard', 'Badger', 'Alligator']
+
+  threats = ['Weregecko', 'Reacher', 'Ghost', 'Deamon', 'Dingo', 'Dragon', 'Giant Eagle', 'Vampire', 'Wolf', 'Fire Imp',
+              'Beaver Man', 'Adder', 'Magma Crab', 'Carp', 'Troll', 'Bogeymen', 'Zombie', 'Miasma', 'Giant', 'Bryant']
+
+  fortress = {}
+  fortress['dwarves'] = {}
+  # put everything in a sub-dictionary so not polute the global dictionary
+  gDict['Fortress'] = fortress
+  # make some dorfs
+  for i in range(0, 100):
+    name = 'Urist-' + firstNames[random.randint(0, 9)] + " " + lastNames[random.randint(0, 9)]
+    fortress['dwarves'][name] = {'skills' : []}
+    # give them some random skills
+    for j in range(1, 14):
+      skill = skills[random.randint(0,len(skills)-1)]
+      # break into multiple calls so the aptitude is ceter weighted
+      aptitude = random.randint(0,5) + random.randint(0,5) + random.randint(0,5) + random.randint(0,5)
+      fortress['dwarves'][name]['skills'].append({skill: aptitude})
+
+  # add some passive wildlife
+  fortress['wildlife'] = []
+  for i in range(0,70):
+    fortress['wildlife'].append(wildlife[random.randint(0,len(wildlife)-1)])
+
+  # make a few threats
+  fortress['threats'] = []
+  for i in range(0,20):
+    fortress['threats'].append(threats[random.randint(0,len(threats)-1)])
 
 # # Example:
 # # NOTE: function must take a data argument, this could be any type
@@ -108,7 +147,8 @@ def main():
     AddListener('Event_Start', fnStart)
     AddListener('Event_Win', winEvent)
     
-    # ONLY ADD/MOVE LISTERNS UNDER HERE!   
+    # ONLY ADD/MOVE LISTERNS UNDER HERE!
+    AddListener('Event_Start', buildFortress)
     AddListener('Event_Start', fnShitGetsCrayFoSheezey)
     AddListener('Event_Start', fnDynamite)
     AddListener('Event_Start', vowelLimiter)
